@@ -1,0 +1,25 @@
+<% include partials/header.ejs %>
+
+<!-- <pre>  <%= dump(posts) %> </pre> -->
+
+    <main align= "center">
+        <h2>Latest Posts</h2>
+        <div class="card">
+           
+            <% posts.forEach(post =>{ %>
+                <div class="card-body">
+                    <li>
+                        <h2 class="card-title">
+                        <span><%= post.author.username %></span>:
+                            <a href="/post/<%= post.id %>">
+                                <%= post.title %>
+                            </a>
+                        </h2>
+                        
+                    </li>
+                </div>
+                <% }) %>
+        </div>
+    </main>
+
+    <% include partials/footer.ejs  %>

@@ -1,0 +1,25 @@
+<% include ../partials/header  %>
+<p><%= user.username %></p>
+<p><%= user.firstname %></p>
+<p><%= user.lastname %> </p>
+<p><%= user.email %></p>
+
+<% user.posts.forEach(post =>{ %>
+    <li>
+        <h2><%= post.title %></h2>
+        <p>
+            <%= post.post %>
+        </p>
+        
+    </li>
+<% }) %>
+
+<% user.comments.forEach(comment =>{ %>
+    <li>
+        <p>
+            <%= comment.body %>
+        </p>
+        
+    </li>
+<% }) %>
+<% include ../partials/footer  %>

@@ -1,0 +1,60 @@
+body{
+	background-color: aquamarine
+}
+div.top{
+	display: flex;
+}
+div.top>div.about>ul{
+	display: flex;
+}
+li.top{
+	margin-left: 5px;
+	background: thistle;
+	padding: 5px;
+	border-radius: 3px;
+}
+
+div.top>nav.auth_nav{
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+}
+.auth_nav li.top {
+	margin: 10px;
+	height: 20px;
+}
+
+
+
+#top_header{
+	background: linear-gradient(65deg, red, black);
+	border: 5px solid white;
+	padding: 50px;
+	margin:0px;
+	display:block;
+}
+
+
+main{
+	text-align: center;
+}
+
+#top_menu{
+	border:2px solid white;
+	padding:10px;
+	background: white;
+}
+
+li{
+	list-style: none;
+}
+a{
+	text-decoration:none;
+}
+#top_menu li{
+	text-decoration-style: none;
+	display:inline-block;
+	list-style:none;
+	padding:5px;
+	font:bold 10px tahoma;
+}

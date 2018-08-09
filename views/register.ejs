@@ -1,0 +1,31 @@
+<% include partials/header.ejs %>
+<form action="/register" method="POST">
+    <div>
+        <label for="username">Username </label>
+        <input type="text" name="username" placeholder="enter username">
+    </div>
+    <div>
+        <label for="firstname">Firstname</label>
+        <input type="text" name="firstname" placeholder="enter firstname">
+    </div>
+    <div>
+        <label for="lastname">Lastname</label>
+        <input type="text" name="lastname" placeholder="enter lastname">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="enter email">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="enter password">
+    </div>
+    <div>    
+        <label for="retype password">Retype password</label>
+        <input type="password" name="checkpassword" placeholder="retype password">
+    </div>
+
+    <button>Register</button>
+
+</form>
+<% include ./partials/footer.ejs  %>

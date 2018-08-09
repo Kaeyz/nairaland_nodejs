@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+
+<h2>Delete Comment</h2>
+<h4>Are you sure you want to delete comment</h4>
+<p>Once deleted comment cannot be retrived</p>
+
+
+<form action="/post/<%= post_id %>/comment/<%= comment_id %>/delete/yes?_method=DELETE" method = "POST">
+<button>Yes</button>
+</form>
+
+
+<form action="/post/<%= post_id %>" method="GET">
+    <button>No</button>
+    </form>
+
+ <% include ../partials/footer  %>

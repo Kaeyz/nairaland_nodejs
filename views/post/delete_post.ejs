@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+
+<h2>Delete Post</h2>
+<h4>Are you sure you want to delete post</h4>
+<p>Once deleted post cannot be retrived</p>
+
+
+<form action="/post/<%= post.id %>/delete?_method=DELETE" method = "POST">
+<button>Yes</button>
+</form>
+
+
+<form action="/post/<%= post.id %>" method="GET">
+    <button>No</button>
+    </form>
+
+ <% include ../partials/footer  %>

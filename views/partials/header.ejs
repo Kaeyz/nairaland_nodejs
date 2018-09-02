@@ -10,90 +10,80 @@
 </head>
 
 <body>
-    <div class= "top">
-        <div class= "about">
-            <ul>
-                <li class="top">About Us</li>
-                <li class="top">Contact Us</li>
-                <li class="top">Privacy and Policy</li>
-                <li class="top">Help</li>
-            </ul>
-        </div>
-        <nav class="auth_nav">
-                <% if (!currentUser) { %> 
-                    <ul>
-                    <h5>Welcome Guest</h5> 
-                    <li class="top">
-                        <a href = "/login">login</a>
-                    </li>
-                    <li class="top">
-                       <a href= "/register">Register</a>
-                    </li>
-                    <li class="top">
-                            <a href= "">Reset Password</a>
-                        </li>
-                    <% } else { %>
-                        <h5>Welcome <%= currentUser.username %></a></h5> 
-                    <li class="top">
-                        <a href= "">Reset Password</a>
-                    </li>
-                    <li class="top">
-                        <a href= "/logout">Logout</a>
-                    </li>
-                    <li class="top">
-                            <a href= "">Settings</a>
-                    </li>
-                    </ul>
-                    <% }  %>
-        </nav>
-    </div>
-            <header id="top_header">
-                <div id="titlemenu">
-                    <h1>
-                        <a href="/">Nairaland Clone</a>
-                    </h1>
-                </div>
-                <nav id="top_menu">
-                  <% if (!currentUser) { %> 
-                    <h5>Welcome Guest</h5> 
-                    <li>
-                        <a href= "/">Home</a>
-                    </li>
-                    <li>
-                        <a href = "/login">login</a>
-                    </li>
-                    <li>
-                       <a href= "/register">Register</a>
-                    </li>
-                    </ul>
-                    <% } else { %>
-                    <li>
-                        <a href= "/user/<%= currentUser._id %>">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href= "/post/new">Create Post</a>
-                    </li>
+    <div class= "container">
+            <div class= "top">
+                    <div class= "about">
+                        <ul>
+                            <li>About Us /</li>
+                            <li>Contact Us /</li>
+                            <li>Privacy and Policy /</li>
+                            <li>Help</li>
+                        </ul>
+                    </div>
                     
-                    </ul>
-                    <% }  %>
-                </nav>
-            </header>
-
-             <% if(error && error.length > 0) { %>
-                 <div class= "container">
-                    <div class= "alert alert-danger" role="alert">
+                    <div class="titlemenu">
                         <h1>
-                            <%= error %>
+                            <a href="/">Nairaland Clone</a>
                         </h1>
+                    
+                        <nav class="auth_nav">
+                            <% if (!currentUser) { %> 
+                                <ul>
+                                    <div>
+                                        <h3>Welcome Guest /</h3> 
+                                        <li>
+                                            <a class= "headlink" href= "/">Home /</a>
+                                        </li>
+                                        <li>
+                                            <a class= "headlink" href = "/login">login /</a>
+                                        </li>
+                                        <li>
+                                            <a class= "headlink" href= "/register">Register /</a>
+                                        </li>
+                                        <li>
+                                            <a class= "headlink" href= "/forgot">Reset Password</a></a>
+                                        </li>
+                                    </div>
+                            <% } else { %>
+                                    <h3>Welcome <%= currentUser.username %> /</a></h3> 
+                                    <li>
+                                        <a class= "headlink" href= "/">Home /</a>
+                                    </li>
+                                    <li>
+                                        <a  class= "headlink"href= "/logout">Logout /</a>
+                                    </li>
+                                    <li>
+                                        <a class= "headlink" href= "/user/<%= currentUser._id %>">Dashboard /</a>
+                                    </li>
+                                    <li>
+                                        <a class= "headlink" href= "/post/new">Create Post /</a>
+                                    </li>
+                                    <li>
+                                        <a class= "headlink" href= "">Settings</a>
+                                    </li>
+                                </ul>
+                            <% }  %>
+                        </nav>
                     </div>
-                </div> 
-             <% } %>
-             <% if (success && success.length > 0) {  %>
-                 <div class= "container">
-                    <div class="alert alert-success" role="alert">
-                        <h1>
-                            <%= success %>
-                        </h1>
-                    </div>
-                </div> 
-            <% }  %>
+                </div>
+                        
+                         <% if(error && error.length > 0) { %>
+                             <div>
+                                <div class= "alert alert-danger" role="alert">
+                                    <h2>
+                                        <%= error %>
+                                    </h2>
+                                </div>
+                            </div> 
+                         <% } %>
+                         <% if (success && success.length > 0) {  %>
+                             <div>
+                                <div class="alert alert-success" role="alert">
+                                    <h2>
+                                        <%= success %>
+                                    </h2>
+                                </div>
+                            </div> 
+                        <% }  %>
+            
+ 

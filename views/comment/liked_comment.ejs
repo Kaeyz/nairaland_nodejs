@@ -1,0 +1,13 @@
+<% include ../partials/header  %>
+<h3>comments</h3>
+
+<% comment.likes.forEach(user =>{ %>
+    <li>
+        <p>
+           <a href="/user/<%= user.id %>"> <%= user.username %></a> 
+        </p>
+    </li>
+<% }) %>
+
+
+<% include ../partials/footer  %>

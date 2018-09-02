@@ -1,13 +1,14 @@
 <% include ../partials/header %>
-
+<main>   
     <h2>New Post</h2>
     <form action="/post/new" method="POST">
         <p>Post Title:</p>
         <input type="text" name="title" placeholder="Enter the post title">
         <p>Post Body:</p>
-        <textarea type="text" name="post" placeholder="Enter post body" rows="10" cols="50"></textarea>
+        <textarea type="text" name="post" placeholder="Enter post body"></textarea>
         <br/>
         <button>Create Post</button>
     </form>
+</main>
 
     <% include ../partials/footer %>

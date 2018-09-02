@@ -1,60 +1,228 @@
-body{
-	background-color: aquamarine
+*{
+	margin: 0px;
+	padding: 0px;
 }
-div.top{
-	display: flex;
+h1{
+	font: bold 40px Viner Hand ITC;
 }
-div.top>div.about>ul{
-	display: flex;
+h2{
+	font: bold 20px Tahoma;
 }
-li.top{
-	margin-left: 5px;
-	background: thistle;
-	padding: 5px;
-	border-radius: 3px;
+h4{
+	font: bold 15px Tahoma;
 }
-
-div.top>nav.auth_nav{
-	display: flex;
-	align-items: center;
-	margin-left: auto;
+h5{
+	font: bold 10px Tahoma;
 }
-.auth_nav li.top {
-	margin: 10px;
-	height: 20px;
-}
-
-
-
-#top_header{
-	background: linear-gradient(65deg, red, black);
-	border: 5px solid white;
-	padding: 50px;
-	margin:0px;
+header, section, footer, aside, nav, article, hgroup{
 	display:block;
 }
 
+body{
+	text-align: center;	
+}
+
+/*****************************************/
+/* Header and footer stlyle starts here */
+/****************************************/
+
+.container{
+	width: 85vw;
+	border: 2px solid brown;
+	border-radius: 9px;
+	margin: 5px auto;
+	background: rgb(65, 197, 146);
+}
+@media only screen and (max-width:900px) {
+	.container{
+		width: 99vw;
+		border: 2px solid brown;
+		border-radius: 9px;
+		margin: 5px auto;
+		background: rgb(65, 197, 146);
+	}
+}
+.about {
+	border: 2px solid brown;
+	border-radius: 9px;
+	margin: 5px;
+}
+.about>ul>*{
+	display: inline;
+	margin: 5px
+}
+.titlemenu{
+	border: 2px solid brown;
+	border-radius: 9px;
+	margin: 5px
+}
+.titlemenu>h1>*{
+	text-decoration: none;
+}
+.auth_nav>*{
+	display: inline;
+}
+.headlink{
+	list-style-type: none;
+	text-decoration: none;
+}
+.alert{
+	border: 2px solid brown;
+	border-radius: 9px;
+	margin: 5px
+}
+ul>div>*{
+	display: inline;
+}
+button{
+	height: 30px;
+	margin: 3px;
+	padding: 5px;
+	border-radius: 5px;
+	color: brown;
+	cursor: pointer;
+	position: sticky;
+	left: 10px;
+}
+
+textarea{
+	margin:5px;
+	border-color: brown;
+	border-radius: 5px;
+	height: 30em;
+	width: 80vw;
+}
+textarea.comment{
+	margin:5px;
+	border-color: brown;
+	border-radius: 5px;
+	height: 15em;
+	width: 60vw;
+}
+
+/**************************************/
+/* Header and footer stlyle ends here */
+/**************************************/
+
+
+/*********************************/
+/* home.ejs page Css starts here */
+/*********************************/
 
 main{
-	text-align: center;
+	border: 2px solid brown;
+	border-radius: 9px;
+	margin: 5px
 }
-
-#top_menu{
-	border:2px solid white;
-	padding:10px;
-	background: white;
+.post>span>a{
+	text-decoration: none;
+	font-family:Georgia;
+	font-size: 15px;
+	color:black;
 }
-
-li{
-	list-style: none;
-}
-a{
+.post-body{
 	text-decoration:none;
 }
-#top_menu li{
-	text-decoration-style: none;
-	display:inline-block;
-	list-style:none;
-	padding:5px;
-	font:bold 10px tahoma;
+.post-list{
+	list-style: none;
+	margin:5px;
+	padding:2px;
 }
+/*******************************/
+/* home.ejs page Css ends here */
+/*******************************/
+
+
+/*******************************************************************/
+/* login.ejs, register.ejs, resetpassword.ejs page Css starts here */
+/*******************************************************************/
+h2{
+	margin:3px;
+}
+label{
+	font: bold 10px Tahoma;
+}
+input{
+	margin:5px;
+	border-color: brown;
+	border-radius: 5px;
+	height: 20px;
+	width: 60vw;
+}
+.not-member{
+	margin: 5px;
+}
+.not-member>*{
+display: inline;
+}
+
+@media only screen and (max-width:1100px) {
+label{
+	display: block;
+}
+}
+
+/*******************************************************************/
+/* login.ejs, register.ejs, resetpassword.ejs page Css ends here */
+/*******************************************************************/
+
+
+/**********************************/
+/* Show_post page Css starts here */
+/**********************************/
+.post_container>h5 {
+text-align: right;
+margin: 5px;
+}
+.post_container>p {
+	text-align: left;
+	padding: 2px;
+}
+.comment_container>li{
+list-style: none;
+}
+.comment_container>li>p{
+	text-align: left;
+	padding: 2px;
+}
+.comment_container>h5{
+text-align: right;
+margin:5px;
+}
+.addComment_container>form>textarea{
+	width:80vw;
+}	
+/********************************/
+/* Show_post page Css ends here */
+/********************************/
+
+/***************************************/
+/* dashboard.ejs css style starts here */
+/***************************************/
+
+.photo>img{
+	height: 10em;
+	width: 10em;
+}
+.photo>form>input{
+	width:10em;
+}
+.user_info>h4{
+ text-align: left;
+}
+.user_stats>span>a{
+	text-decoration: none;
+	color: black;
+}
+.follow>li{
+	list-style: none;
+	text-align: left;
+	margin: 3px;
+}
+.follow>li>p>a{
+	text-decoration: none;
+	color: black;
+}
+/*************************************/
+/* dashboard.ejs css style ends here */
+/*************************************/

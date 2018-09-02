@@ -1,65 +1,146 @@
 <% include ../partials/header %>
+<!--*** Post Section Starts Here ***-->
 
-    <h2>
-        <%= post.title %>
-    </h2>
-    <h5>author:
-        <%= post.author.username %>
-    </h5>
-    <p>
-        <%= post.post %>
-    </p>
+<!-- TODO -->
+<!-- 1. Check if no current user and show only post -->
     <% if (!currentUser) { %>
-    <h3>Comments</h3>
-        <% post.comments.forEach(comment =>{ %>
-            <li>
-                <%= comment.body %>
-                <p>by:
-                    <%= comment.author.username %>
+        <main class="post_container">
+            <h4>
+                <%= post.title %>
+            </h4>
+            <p class="post">
+                <%= post.post %>
+            </p>
+            <h5>
+                author:<%= post.author.username %>
+            </h5>
+        </main>
+        <% } else if(currentUser) { %> <!-- 2. Check if current User -->
+<!-- 2.1 If currrent user is not author show only post and like or unlike -->
+    <% if (currentUser.id != post.author.id) { %>   <!-- for user not equal to author -->
+        <main class="post_container">
+            <h4>
+                <%= post.title %>
+            </h4>
+            <p class="post">
+                <%= post.post %>
+            </p>
+            <!-- convert array of objects to array of strings -->
+            <% let likeArr = []; %>
+            <% post.likes.forEach(like =>{ %>
+                <%  likeArr.push(like.toString()) %>
+                <% }) %>
+                <!-- check if currentuser is included in the array user liked     -->
+                <%  if (likeArr.includes(currentUser.id)) {  %>
+                    <a href="/post/<%= post.id %>/unlike"> Unlike</a> <span><%= post.likes.length %></span><!-- if true show unlike button -->
+                    <% } else { %>
+                        <a href="/post/<%= post.id %>/like"> like </a> <span><%= post.likes.length %></span>     <!-- if false showm like button -->
+                        <% } %>
+                        <h5>
+                            author:<%= post.author.username %>
+                        </h5>
+                    </main>
+        <!-- 2.2 If current user is author show post, like or unlike, edit and delete options.  -->
+        <% } else if (currentUser.id == post.author.id) { %>   
+        <main class="post_container">
+            <h4>
+                <%= post.title %>
+            </h4>
+            <p class="post">
+                <%= post.post %>
+            </p>
+            <!-- convert array of objects to array of strings -->
+            <% let likeArr = []; %>
+            <% post.likes.forEach(like =>{ %>
+                <%  likeArr.push(like.toString()) %>
+                <% }) %>
+                <!-- check if currentuser is included in the array user liked     -->
+                <%  if (likeArr.includes(currentUser.id)) {  %>
+                    <a href="/post/<%= post.id %>/unlike"> Unlike</a> <span><%= post.likes.length %></span><!-- if true show unlike button -->
+                    <% } else { %>
+                        <a href="/post/<%= post.id %>/like"> like </a> <span><%= post.likes.length %></span>     <!-- if false showm like button -->
+                        <% } %>
+                        <span>  <!-- edit and delete option -->
+                            <a href="/post/<%= post.id %>/update">Edit</a>
+                            <a href="/post/<%= post.id %>/delete">Delete</a>
+                        </span>
+                        <h5>
+                            author:<%= post.author.username %>
+                        </h5>
+            </main>
+        <% } %>            
+    <% } %> 
+<!--*** Post Section Ends Here ***-->
+
+
+
+<!--*** Comment Section Starts Here ***-->
+<h3>Comments</h3>
+<!-- TODO -->
+    
+<!-- 1. Check if there is no current user and show only comments -->
+<% if (!currentUser) { %>
+    <% post.comments.forEach(comment =>{ %>      <!-- loop through the array of comments to get each comments -->
+    <main class="comment_container">
+        <li>
+                <p>
+                    <%= comment.body %>
                 </p>
             </li>
-        <% }) %>
-    <% } else if(currentUser) { %>
-        <% if (currentUser.id == post.author.id) { %>
-            <p>
-                <a href="/post/<%= post.id %>/update">Edit</a>
-                <a href="/post/<%= post.id %>/delete">Delete</a>
-            </p>
-            <h3>Comments</h3>
-                <% post.comments.forEach(comment =>{ %>
-                <li>
+            <h5>by: 
+               <%= comment.author.username %>
+            </h5>
+    </main>
+    <% }) %>
+    <!-- 2. Check if there is a current user -->
+    <% } else if (currentUser) { %>
+        <% post.comments.forEach(comment =>{ %>      <!-- loop through the array of comments to get each comments -->
+        <main class="comment_container">
+            <li>
+                <p>
                     <%= comment.body %>
-                    <p>
-                        by:<%= comment.author.username %>
-                        <% if (currentUser.id == comment.author.id) { %>
-                            <a href="/post/<%= post.id %>/comment/<%= comment.id %>/edit">Edit</a>
-                            <a href="/post/<%= post.id %>/comment/<%= comment.id %>/delete">Delete</a>
-                        <% } %>
-                    </p>
-                </li>
-            <% }) %>
-            <form action="/post/<%= post.id %>/comment" method="post">
-                <textarea type="text" placeholder="Enter your comment" name="comment[body]" id="text" rows="10" cols="50"></textarea>
-                <button type="submit">Submit</button>
-             </form>
-        <% } else if (currentUser.id !== post.author.id ) { %>
-            <h3>Comments</h3>
-                <% post.comments.forEach(comment =>{ %>
-                <li>
-                    <%= comment.body %>
-                    <p>
-                        by:<%= comment.author.username %>
-                        <% if (currentUser.id == comment.author.id) { %>
-                            <a href="/post/<%= post.id %>/comment/<%= comment.id %>/edit">Edit</a>
-                            <a href="/post/<%= post.id %>/comment/<%= comment.id %>/delete">Delete</a>
-                        <% } %>
-                     </p>
-                </li>
+                </p>
+            </li>
+            <!-- code of the comment like and unlike button starts here  -->
+            <% let commentLikeArr = []; %> <!-- converts array of objectID to array of stringsID -->
+            <% comment.likes.forEach(like =>{ %>
+                <%  commentLikeArr.push(like.toString()) %>
                 <% }) %>
-            <form action="/post/<%= post.id %>/comment" method="post">
-                <textarea type="text" placeholder="Enter your comment" name="comment[body]" id="text" rows="10" cols="50"></textarea>
-                <button type="submit">Submit</button>
+                
+            <!-- 2.1 Check If Currentuser is not the author of post show comments, add comment section and like or unlike -->
+            <% if (currentUser.id != comment.author.id) { %>
+            <%  if (commentLikeArr.includes(currentUser.id)) {  %>
+                <a href="/post/<%= post.id %>/comment/<%= comment.id %>/unlike"> Unlike <span> <%= comment.likes.length %></span></a>
+                <% } else { %>
+            <a href="/post/<%= post.id %>/comment/<%= comment.id %>/like"> like </a> <span><%= comment.likes.length %></span>
+            <% } %>
+            <!-- code for comment like and unlike button ends here -->
+            <!-- 2.2 If Current User is the authour of post show Comments, like or unlike, edit and delete option -->
+            <% } else if (currentUser.id == comment.author.id) { %>    
+                <%  if (commentLikeArr.includes(currentUser.id)) {  %>
+                    <a href="/post/<%= post.id %>/comment/<%= comment.id %>/unlike"> Unlike <span> <%= comment.likes.length %></span></a>
+                <% } else { %>
+                    <a href="/post/<%= post.id %>/comment/<%= comment.id %>/like"> like </a> <span><%= comment.likes.length %></span>
+                <% } %>
+                <a href="/post/<%= post.id %>/comment/<%= comment.id %>/edit">Edit</a>
+                <a href="/post/<%= post.id %>/comment/<%= comment.id %>/delete">Delete</a>
+            <% } %>
+                <h5>by:
+                        <%= comment.author.username %>
+                </h5>
+            </main>
+            <% }) %>
+            <main class="addComment_container">
+                <form action="/post/<%= post.id %>/comment" method="post">
+                    <p>Add Comment:</p>
+                    <textarea class="comment" type="text" placeholder="Enter your comment" name="comment[body]" id="text" rows="10"
+                    cols="40"></textarea>
+                    <button type="submit">Submit</button>
+            </main>
             </form>
-        <% }  %>   
-    <% }  %>
+            <% }  %>
+
+        
+<!--*** Comment Section Ends Here ***-->
+
 <% include ../partials/footer  %>

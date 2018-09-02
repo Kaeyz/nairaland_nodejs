@@ -1,0 +1,15 @@
+<% include ../partials/header  %>
+<main class="follow">
+    <h3>following</h3>
+    
+    <% user.followings.forEach(follow =>{ %>
+        <li>
+            <p>
+                <a href="/user/<%= follow.id %>"> <%= follow.username %></a> 
+            </p>
+        </li>
+        <% }) %>
+</main>
+
+
+<% include ../partials/footer  %>

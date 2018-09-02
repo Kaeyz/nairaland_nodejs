@@ -1,25 +1,50 @@
 <% include ../partials/header  %>
-<p><%= user.username %></p>
-<p><%= user.firstname %></p>
-<p><%= user.lastname %> </p>
-<p><%= user.email %></p>
+<main>
+    <div class="photo">
+        <img src="/gallery/<%= user.username %>.jpg" alt="<%= user.username %>"> 
+        <form action="/user/<%= user.id %>/photo" method="POST" enctype="multipart/form-data">
+            <input type="file" name="photo" id="photo" accept="image/gif, image/png, image/jpeg">
+            <button>Change</button>
+        </form>
+    </div>
+<div class="user_info">
+<h4>Username: <span>  <%= user.username %></span></h4>
+<h4>Name: <span>  <%= user.lastname %> <%= user.firstname %> </span></h4>
+<h4>Email: <span>  <%= user.email %></span></h4>
+</div>
+<!-- code of the follow and unfollow button starts here -->
+    <% if (currentUser.id != user.id) { %>
+    <% let followArr = []; %>
+    <% user.followers.forEach(follow =>{ %>
+    <%  followArr.push(follow.toString()) %>
+    <% }) %>
+    <%  if (followArr.includes(currentUser.id)) {  %>
+    <a href="/user/<%= user.id %>/unfollow"> Unfollow</a>
+    <% } else { %>
+    <a href="/user/<%= user.id %>/follow"> Follow</a>
+    <% } %>
+    <% } %>
+    <!-- code for follow and unfollow button ends here -->
+<div class="user_stats">
+    <span> 
+        <a href="/user/<%= user.id %>/follower">
+            <%= user.followers.length %> followers
+        </a> /
+    </span>
+    <span><a href="/user/<%= user.id %>/following">
+        <%= user.followings.length %> following
+        </a> /
+    </span>
+    <span><a href="/user/<%= user.id %>/posts">
+        <%= user.posts.length %> post(s)
+        </a> /
+    </span>
+    <span>
+        <a href="/user/<%= user.id %>/posts">
+            <%= user.comments.length %> comment(s)
+        </a>
+    </span>
+        </div>
+</main>
 
-<% user.posts.forEach(post =>{ %>
-    <li>
-        <h2><%= post.title %></h2>
-        <p>
-            <%= post.post %>
-        </p>
-        
-    </li>
-<% }) %>
-
-<% user.comments.forEach(comment =>{ %>
-    <li>
-        <p>
-            <%= comment.body %>
-        </p>
-        
-    </li>
-<% }) %>
 <% include ../partials/footer  %>

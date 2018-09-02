@@ -1,0 +1,11 @@
+<% include partials/header.ejs %>
+<form action="/forgot" method="POST">
+   <h3>Forgot Password</h3>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" placeholder="enter email">
+    </div>
+    
+    <button>Send Reset Email</button>
+</form>
+<% include ./partials/footer.ejs  %>

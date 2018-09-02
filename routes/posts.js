@@ -60,12 +60,58 @@ router.get("/", (req, res) => {
        req.flash('error', 'Post not find')
        console.log(err);
      }else {
-       console.log(post);
        res.render('post/show_post', {post:post})
      }
    })
   });
+
+  //Route to like post
+  router.get("/:id/like", middlewareObj.isLoggedIn, (req, res) => {
+    const {id} = req.params
+    const {_id, username} = req.user
+    let newLike = {_id, username}
+    Post.findById(id, (err, foundPost) => {
+      if (err) {
+        console.log(err);
+      } else {
+    foundPost.likes.push(newLike)
+    foundPost.save()
+    req.flash('success', 'Liked')
+   res.redirect('back')
+      }
+    })
+    })
   
+  //Route to unlike post 
+  router.get("/:id/unlike", middlewareObj.isLoggedIn, (req, res) => {
+    const {id} = req.params
+    Post.findById(id, (err, foundPost) => {
+      if (err) {
+        console.log(err);
+      } else {
+        foundPost.likes.forEach((like, index) => {
+          if (like == req.user.id) {
+              foundPost.likes.splice(index, 1)
+          }
+      });
+      foundPost.save();
+      req.flash('success', 'Post Unliked')
+      res.redirect('back')
+      }
+    })
+  })
+
+  //Route to show liked user
+  router.get("/:id/likes", middlewareObj.isLoggedIn, (req, res) => {
+    Post.findById(req.params.id).populate("likes").exec((err, post)=> { 
+        if(err){
+          req.flash('error', 'List not found')
+          console.log(err);
+        }else {
+          res.render('post/liked_post', {post:post})
+        }
+      }) 
+     })
   // Route for Update posts
   router.get("/:id/update", middlewareObj.checkPostOwnership,(req, res) => {
     Post.findById({

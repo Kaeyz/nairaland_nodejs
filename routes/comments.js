@@ -41,6 +41,7 @@ router.post("/", middlewareObj.isLoggedIn, (req, res) => {
     }
   })
 })
+
 // route to render edit comment page
 router.get('/:comment_id/edit', middlewareObj.checkCommentOwnership, (req, res)=> {
   Comment.findById(req.params.comment_id, (err, foundComment) => {
@@ -53,7 +54,7 @@ router.get('/:comment_id/edit', middlewareObj.checkCommentOwnership, (req, res)=
 })
 
 // route to edit comment usng PUT
-router.put('/:comment_id/edit', middlewareObj.checkCommentOwnership, (req,res) => {
+router.put('/:comment_id/edit', middlewareObj.checkCommentOwnership, (req, res) => {
   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment) => {
     if (err){
       res.redirect('back')
@@ -77,6 +78,54 @@ router.delete('/:comment_id/delete/yes', middlewareObj.checkCommentOwnership, (r
       res.redirect(`/post/${req.params.id}`)
     }
   })
+})
+
+//Route to like comment
+router.get("/:comment_id/like", middlewareObj.isLoggedIn, (req, res) => {
+  const {comment_id} = req.params
+  const {_id, username} = req.user
+  let newLike = {_id, username}
+  Comment.findById(comment_id, (err, foundComment) => {
+    if (err) {
+      console.log(err);
+    } else {
+  foundComment.likes.push(newLike)
+  foundComment.save()
+  req.flash('success', 'Liked')
+  res.redirect('back')
+    }
+  })
+})
+
+//Route to unlike comment 
+router.get("/:comment_id/unlike", middlewareObj.isLoggedIn, (req, res) => {
+  const {comment_id} = req.params
+  Comment.findById(comment_id, (err, foundComment) => {
+    if (err) {
+      console.log(err);
+    } else {
+      foundComment.likes.forEach((like, index) => {
+        if (like == req.user.id) {
+            foundComment.likes.splice(index, 1)
+        }
+    });
+    foundComment.save();
+    req.flash('success', 'Unliked')
+    res.redirect('back')
+    }
+  })
+})
+
+//Route to show liked user
+router.get("/:comment_id/likes", middlewareObj.isLoggedIn, (req, res) => {
+  Comment.findById(req.params.comment_id).populate("likes").exec((err, comment)=> { 
+    if(err){
+      req.flash('error', 'List not found')
+      console.log(err);
+    }else {
+      res.render('comment/liked_comment', {comment:comment})
+    }
+  }) 
 })
 
 module.exports = router

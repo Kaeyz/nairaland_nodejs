@@ -7,6 +7,10 @@ const UserSchema = new mongoose.Schema({
     firstname: String,
     lastname: String,
     email: {type:String, unique: true, required: true},
+    photo: String,
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
+    isAdmin: {type: Boolean, default: false},
     posts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Post"
@@ -16,16 +20,12 @@ const UserSchema = new mongoose.Schema({
         ref: "Comment"
     }],
     followings: [{
-        id :{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment"},
-        username: String
-    }],
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"}
+        ],
     followers: [{
-        id :{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Comment"},
-        username: String
+        ref: "User"
     }],
 })
 

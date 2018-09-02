@@ -1,0 +1,12 @@
+<% include partials/header.ejs %>
+<form action="/reset/<%= token %>" method="POST">
+   <h3>New Password</h3>
+    <div>
+        <label for="email">Password</label>
+        <input type="password" name="password" placeholder="enter new password">
+        <label for="email">Confirm Password</label>
+        <input type="password" name="confirm" placeholder="confirm new password"> 
+        <button>Save new Password</button>
+    </div>
+</form>
+<% include ./partials/footer.ejs  %>

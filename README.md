@@ -11,7 +11,7 @@ As a Guest User
 As a Registered User
 1. Login and Logout.
 2. Create, edit and delete a post by the particular user.
-3. Create, edit and delete a comment by the particular use.
+3. Create, edit and delete a comment by the particular user.
 4. Reset password.
 5. Follow and unfollow another User.
 6. Like and Unlike a post.

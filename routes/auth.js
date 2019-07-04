@@ -19,9 +19,7 @@ router.get("/", (req, res) => {
             err;
         } else {
             posts;
-            res.render("home", {
-                posts
-            });
+            res.render("home", {posts});
         }
     });
 })
@@ -32,35 +30,27 @@ router.get("/register", (req, res) => {
 
 router.post("/register", (req, res) => {
     if (req.body.password === req.body.checkpassword) {
-        const {
-            username,
-            firstname,
-            lastname,
-            email
-        } = req.body
-        const newuser = new User({
-            username,
-            firstname,
-            lastname,
-            email
-        })
-        User.register(newuser, req.body.password, (err, user) => {
+        const { username, firstname, lastname, email } = req.body
+        const newUser = new User({ username, firstname, lastname, email })
+
+        User.register(newUser, req.body.password, (err, user) => {
             if (err) {
                 console.log(err);
                 if (err.code == 11000) {
-                    req.flash('error', `user with ${req.body.email} exist already`)
+                    req.flash('error', `user with ${req.body.email} already exist`)
                 } else {
                     req.flash('error', err.message)
                 }
                 res.redirect('back')
             } else {
                 passport.authenticate('local')(req, res, function () {
-                    req.flash('success', `Welcome to Nairaland Clone ${user.username}`)
+                    req.flash('success', `Welcome to Nairaland Clone ${user.username}` )
                     res.redirect('/')
                 })
             }
         })
     } else {
+        req.flash("error", "OOOPS!!!!! Password do not match. Try Again")
         res.redirect('back');
     }
 })
@@ -75,6 +65,7 @@ router.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
     failureFlash: 'Unable to log in. TRY AGAIN'
 }), (req, res) => {})
+
 
 router.get('/logout', (req, res) => {
     req.logout()
@@ -107,6 +98,7 @@ router.post("/forgot", (req, res, next) => {
                 })
             })
         },
+
         function(token, user, done) {
             let smtpTransport = nodemailer.createTransport({
                 service: 'Gmail', 
@@ -115,6 +107,7 @@ router.post("/forgot", (req, res, next) => {
                     pass: process.env.GMAILPASS
                 }
             });
+
             let mailOptions = {
                 to: user.emial,
                 from: 'nairalandclone@gmail.com',
@@ -182,7 +175,7 @@ router.post('/reset/:token', (req, res) => {
                 from: 'nairalandclone@gmail.com',
                 subject: 'Your password has been changed',
                 text: 'Hello,\n\n' + 
-                'This is a confirmaton that the password for tour account '+ user.email + 'has been changed.'
+                'This is a confirmaton that the password for your account '+ user.email + 'has been changed.'
             }
             smtpTransport.sendMail(mailOptions, (err) => {
                 req.flash('success', 'Success! Your has password has been changed.');

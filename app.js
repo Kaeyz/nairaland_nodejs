@@ -27,9 +27,9 @@ const postRoutes = require('./routes/posts')
 const commentRoutes = require('./routes/comments')
 
 // const dbUrl = process.env.DATABASE 
-const dbUrl =  'mongodb://localhost:27017/nairaland_clone'
+const dbUrl = 'mongodb://localhost:27017/nairaland_clone'   /* process.env.DATABASE || */ 
 mongoose.connect(dbUrl, { useNewUrlParser: true }).catch(err => {console.log(err);});
-const port = process.env.PORT;
+const port = 80;
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -64,6 +64,7 @@ app.use('/user', userRoutes)
 app.use('/post', postRoutes);
 app.use('/post/:id/comment', commentRoutes)
 
+
 app.listen(port, () => {
-  console.log(`listening on port ${process.env.PORT}`);
+  console.log('listening on port 80');
 });

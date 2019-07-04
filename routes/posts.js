@@ -5,18 +5,18 @@ const mongoose = require('mongoose')
 
 const User = mongoose.model('User')
 const Post = mongoose.model('Post')
-const Comment = mongoose.model('Comment')
 const middlewareObj = require('../middlewares/index')
 
 // Route to render Post
 router.get("/", (req, res) => {
-    Post.find({}, function (err, posts) {
-      if (err) {
-        req.flash('error', 'Database Error')
-      } else {
-        res.render("home", {posts});
+  Post.find({}, function (err, posts) {
+    if (err) {
+      req.flash('error', 'Database Error')
+    } else {
+      posts = posts.sort({ "createdAt": 1 });
+      res.render("home", {posts});
       }
-    }).sort({"createdAt": -1})
+    })
   });
 
   // get router for newpost page render
@@ -60,7 +60,7 @@ router.get("/", (req, res) => {
        req.flash('error', 'Post not find')
        console.log(err);
      }else {
-       res.render('post/show_post', {post:post})
+       res.render('post/show_post', { post });
      }
    })
   });
@@ -122,9 +122,6 @@ router.get("/", (req, res) => {
           req.flash('error', 'Post not found')
           console.log(err);
         } else {
-          console.log({
-            foundPost
-          });
           res.render("post/update_post", {
             post: foundPost
           });

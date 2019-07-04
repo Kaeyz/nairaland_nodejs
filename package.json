@@ -1,17 +1,21 @@
 {
   "name": "nairaland_clone",
   "version": "1.0.0",
-  "description": "",
+  "description": "A nodejs forum",
   "main": "app.js",
   "scripts": {
     "dev": "node app.js",
     "start": "nodemon app.js"
+  },
+  "now": {
+    "dotenv": "variable.env.now"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cloudinary": "^1.11.0",
     "connect-flash": "^0.1.1",
     "dotenv": "^6.0.0",
     "ejs": "^2.6.1",
@@ -24,6 +28,7 @@
     "mongoose": "^5.2.9",
     "multer": "^1.3.1",
     "nodemailer": "^4.6.8",
+    "nodemon": "^1.18.4",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",

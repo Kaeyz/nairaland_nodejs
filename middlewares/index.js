@@ -21,7 +21,6 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
     }
 }
 
-
 middlewareObj.checkPostOwnership = function (req, res, next) {
     if (req.isAuthenticated()) {
         Post.findById(req.params.id, (err, foundPost) => {
@@ -49,7 +48,5 @@ middlewareObj.isLoggedIn = function (req, res, next) {
     }
     res.redirect('/login')
 }
-
-
 
 module.exports = middlewareObj

@@ -17,12 +17,12 @@ var imageFilter = function (req, file, cb) {
 };
 var upload = multer({ storage: storage, fileFIlter: imageFilter})
 // setting up cloudinary
-// const cloudinary = require ('cloudinary')
-// cloudinary.config({
-//   cloud_name: 'nairaland_clone',
-//   api_key: process.env.CLOUDINARY_API_KEY,
-//   api_secret: process.env.CLOUDINARY_API_SECRET
-// })
+const cloudinary = require ('cloudinary')
+cloudinary.config({
+  cloud_name: 'nairaland_clone',
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
 
 const User = mongoose.model('User')
